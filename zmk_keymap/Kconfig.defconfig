@@ -1,0 +1,14 @@
+if SHIELD_DIGIT_LEFT || SHIELD_DIGIT_RIGHT
+        
+
+ config ZMK_SPLIT
+        default y
+endif 
+
+if SHIELD_DIGIT_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "The Digit"
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+endif

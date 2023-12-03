@@ -1,0 +1,891 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
+#include "util.h"
+#include <dt-bindings/zmk/outputs.h>
+&lt {
+    tapping-term-ms = <250>;
+    quick-tap-ms = <150>;
+    flavor = "tap-preferred";
+    require-prior-idle-ms = <80>;
+    };
+&mt {
+    tapping-term-ms = <200>;
+    quick-tap-ms = <150>;
+    flavor = "tap-preferred";
+    };
+&sk {
+    release-after-ms = <10000>;
+    quick-release;
+    };
+#define arstneio 0
+#define num 1
+#define nav 2
+#define media 3
+#define blt 4
+#define tmp 5
+#define mouse 6
+
+/ {
+     behaviors {
+             snv: spaceornav {
+            compatible = "zmk,behavior-hold-tap";
+            label = "holdtap";
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            quick-tap-ms = <100>;
+            global-quick-tap;
+            bindings = <&mo>, <&kp>;
+            require-prior-idle-ms = <30>;
+            hold-trigger-key-positions = <4 5 6 7>;
+         };
+             sc: shiftorcaps {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_0";
+            #binding-cells = <0>;
+            tapping-term-ms = <700>;
+            bindings = <&sk LSHIFT>, <&mo num>;
+        };
+
+             bsp: bsphold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "bsphold";
+            #binding-cells = <2>;
+            tapping-term-ms = <80>;
+            flavor = "hold-preferred";
+            quick-tap-ms = <10000>;
+            bindings = <&kp>, <&kp>;
+         };
+             ee: entoresc {
+            compatible = "zmk,behavior-mod-morph";
+            label = "MOD_MORPH_EE";
+            #binding-cells = <0>;
+            bindings = <&kp ENTER>, <&kp ESC>;
+            mods = <(MOD_LSFT)>;
+        };
+
+             htal: torhalt {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_2";
+            #binding-cells = <0>;
+            tapping-term-ms = <500>;
+            bindings = <&sk LALT>, <&kt LALT>;
+        };
+             htct: torhctrl {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_2";
+            #binding-cells = <0>;
+            tapping-term-ms = <500>;
+            bindings = <&sk LCTRL>, <&kt LCTRL>;
+        };
+             ZMK_MACRO(winright,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&macro_press &kp LALT>,
+                        <&macro_tap &kp TAB>,
+                        <&macro_release &kp LALT>;
+
+              )
+             ZMK_MACRO(winleft,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&macro_press &kp LALT>,
+                        <&macro_tap &sk LSHIFT>,
+                        <&macro_tap &kp TAB>,
+                        <&macro_release &kp LALT>;
+              )
+             ZMK_MACRO(string_sim,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&kp S &kp I &kp M &kp U &kp L &kp A &kp T &kp I &kp O &kp N>;
+              )
+             ZMK_MACRO(string_what,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp H &kp A &kp T>;
+              )
+
+              ZMK_MACRO(string_had,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp A &kp D>;
+              )
+             ZMK_MACRO(string_who,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp H &kp O>;
+              )
+             ZMK_MACRO(string_qu,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp Q &kp U>;
+              )
+             ZMK_MACRO(string_mass,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp M &kp A &kp S &kp S>;
+              )
+             ZMK_MACRO(string_again,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp G &kp A &kp I &kp N>;
+              )
+             ZMK_MACRO(string_against,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp G &kp A &kp I &kp N &kp S &kp T>;
+              )
+             ZMK_MACRO(string_each,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp E &kp A &kp C &kp H>;
+              )
+             ZMK_MACRO(string_ink,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp N &kp K>;
+              )
+             ZMK_MACRO(string_change,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp C &kp H &kp A &kp N &kp G &kp E>;
+              )
+             ZMK_MACRO(string_system,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp Y &kp S &kp T &kp E &kp M>;
+              )
+             ZMK_MACRO(string_program,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp P &kp R &kp O &kp G &kp R &kp A &kp M>;
+              )
+             ZMK_MACRO(string_resolution,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp R &kp E &kp S &kp O &kp L &kp U &kp T &kp I &kp O &kp N>;
+              )
+             ZMK_MACRO(string_about,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp B &kp O &kp U &kp T>;
+              )
+             ZMK_MACRO(string_ever,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp E &kp V &kp E &kp R>;
+              )
+             ZMK_MACRO(string_come,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp C &kp O &kp M &kp E>;
+              )
+             ZMK_MACRO(string_cool,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp C &kp O &kp O &kp L>;
+              )
+             ZMK_MACRO(string_find,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp F &kp I &kp N &kp D>;
+              )
+             ZMK_MACRO(string_now,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp N &kp O &kp W>;
+              )
+             ZMK_MACRO(string_will,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp I &kp L &kp L>;
+              )
+             ZMK_MACRO(string_when,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp H &kp E &kp N>;
+              )
+             ZMK_MACRO(string_also,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp L &kp S &kp O>;
+              )
+             ZMK_MACRO(string_here,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp E &kp R &kp E>;
+              )
+             ZMK_MACRO(string_individual,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp N &kp D &kp I &kp V &kp I &kp D &kp U &kp A &kp L>;
+              )
+             ZMK_MACRO(string_has,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp A &kp S>;
+              )
+             ZMK_MACRO(string_basically,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp B &kp A &kp S &kp I &kp C &kp A &kp L &kp L &kp Y>;
+              )
+             ZMK_MACRO(string_away,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp W &kp A &kp Y>;
+              )
+             ZMK_MACRO(string_progress,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp P &kp R &kp O &kp G &kp R &kp E &kp S &kp S>;
+              )
+             ZMK_MACRO(string_use,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp U &kp S &kp E>;
+              )
+             ZMK_MACRO(string_same,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp A &kp M &kp E>;
+              )
+             ZMK_MACRO(string_going,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp G &kp O &kp I &kp N &kp G>;
+              )
+             ZMK_MACRO(string_was,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp A &kp S>;
+              )
+             ZMK_MACRO(string_range,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp R &kp A &kp N &kp G &kp E>;
+              )
+             ZMK_MACRO(string_out,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp T>;
+              )
+             ZMK_MACRO(string_astrophysics,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp S &kp T &kp R &kp O &kp P &kp H &kp Y &kp S &kp I &kp C &kp S>;
+              )
+             ZMK_MACRO(string_over,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp V &kp E &kp R>;
+              )
+             ZMK_MACRO(string_join,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp J &kp O &kp I &kp N>;
+              )
+             ZMK_MACRO(string_give,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp G &kp I &kp V &kp E>;
+              )
+             ZMK_MACRO(string_ously,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp S &kp L &kp Y>;
+              )
+             ZMK_MACRO(string_ous,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp S>;
+              )
+             ZMK_MACRO(string_say,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp A &kp Y>;
+              )
+             ZMK_MACRO(string_eigh,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp E &kp I &kp G &kp H>;
+              )
+             ZMK_MACRO(string_some,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp O &kp M &kp E>;
+              )
+             ZMK_MACRO(string_follow,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp F &kp O &kp L &kp L &kp O &kp W>;
+              )
+             ZMK_MACRO(string_sure,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp U &kp R &kp E>;
+              )
+             ZMK_MACRO(string_plan,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp P &kp L &kp A &kp N>;
+              )
+             ZMK_MACRO(string_more,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp M &kp O &kp R &kp E>;
+              )
+             ZMK_MACRO(string_the,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp H &kp E>;
+              )
+             ZMK_MACRO(string_ready,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp R &kp E &kp A &kp D &kp Y>;
+              )
+             ZMK_MACRO(string_there,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp H &kp E &kp R &kp E>;
+              )
+             ZMK_MACRO(string_you,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp Y &kp O &kp U>;
+              )
+             ZMK_MACRO(string_vim,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp V &kp I &kp M>;
+              )
+             ZMK_MACRO(string_and,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp N &kp D>;
+              )
+             ZMK_MACRO(string_star,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp S &kp T &kp A &kp R>;
+              )
+             ZMK_MACRO(string_cluster,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp C &kp L &kp U &kp S &kp T &kp E &kp R>;
+              )
+             ZMK_MACRO(string_for,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp F &kp O &kp R>;
+              )
+             ZMK_MACRO(string_how,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp O &kp W>;
+              )
+             ZMK_MACRO(string_well,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&kp W &kp E &kp L &kp L >;
+              )
+             ZMK_MACRO(string_while,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp H &kp I &kp L &kp E>;
+              )
+             ZMK_MACRO(string_ing,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp N &kp G>;
+              )
+             ZMK_MACRO(string_just,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp J &kp U &kp S &kp T>;
+              )
+             ZMK_MACRO(string_igh,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp G &kp H>;
+              )
+
+             ZMK_MACRO(string_ough,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp G &kp H >;
+              )
+
+             ZMK_MACRO(string_ion,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp O &kp N>;
+              )
+
+             ZMK_MACRO(string_those,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp H &kp O &kp S &kp E>;
+              )
+
+             ZMK_MACRO(string_particle,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp P &kp A &kp R &kp T &kp I &kp C &kp L &kp E>;
+              )
+
+             ZMK_MACRO(string_hydrodynamics,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp Y &kp D &kp R &kp O &kp D &kp Y &kp N &kp A &kp M &kp I &kp C &kp S>;
+              )
+
+             ZMK_MACRO(string_interest,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp I &kp N &kp T &kp E &kp R &kp E &kp S &kp T>;
+              )
+             ZMK_MACRO(string_ould,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp L &kp D>;
+              )
+             ZMK_MACRO(string_first,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp F &kp I &kp R &kp S &kp T>;
+              )
+             ZMK_MACRO(string_have,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp H &kp A &kp V &kp E>;
+              )
+             ZMK_MACRO(string_that,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp H &kp A &kp T>;
+              )
+             ZMK_MACRO(string_which,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp H &kp I &kp C &kp H>;
+              )
+             ZMK_MACRO(string_make,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp M &kp A &kp K &kp E>;
+              )
+             ZMK_MACRO(string_function,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp F &kp U &kp N &kp C &kp T &kp I &kp O &kp N>;
+              )
+             ZMK_MACRO(string_real,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp R &kp E &kp A &kp L>;
+              )
+             ZMK_MACRO(string_take,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp A &kp K &kp E>;
+              )
+             ZMK_MACRO(string_good,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp G &kp O &kp O &kp D>;
+              )
+             ZMK_MACRO(string_print,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp P &kp R &kp I &kp N &kp T>;
+              )
+             ZMK_MACRO(string_ause,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp A &kp U &kp S &kp E>;
+              )
+             ZMK_MACRO(string_this,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp T &kp H &kp I &kp S>;
+              )
+             ZMK_MACRO(string_ound,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp O &kp U &kp N &kp D>;
+              )
+             ZMK_MACRO(string_done,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp D &kp O &kp N &kp E>;
+              )
+             ZMK_MACRO(string_with,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings = <&kp W &kp I &kp T &kp H>;
+              )
+             ZMK_MACRO(combo_ctrlC,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&macro_press &kp LCTRL>
+              ,<&macro_tap &kp C>
+              ,<&macro_release &kp LCTRL>;
+              )
+             ZMK_MACRO(combo_ctrlV,
+              wait-ms = <1>;
+              tap-ms = <1>;
+              bindings =<&macro_press &kp LCTRL>
+              ,<&macro_tap &kp V>
+              ,<&macro_release &kp LCTRL>;
+              )
+             };
+      conditional_layers {
+        compatible = "zmk,conditional-layers";
+        num {
+          if-layers = <1 2>;
+          then-layer = <5>;
+      };
+    };
+     keymap {
+             compatible = "zmk,keymap";
+
+             arstneio {
+             bindings = <
+             &mt N1 A &mt N2 R &mt N3 S  &mt N4 T  &mt N5 N &mt N6 E  &mt N7 I  &mt N8 O
+                                &lt nav SPACE &sk LSHFT
+             >;
+             };
+             num {
+             bindings = <
+             &mt F1 N1 &mt F2 N2 &mt F3 N3 &mt F4 N4 &mt F5 N5 &mt F6 N6 &mt F7 N7 &mt F8 N8
+                                   &trans &trans
+            >;
+            };
+            nav {
+            bindings = <
+            &kp BSPC &none &to mouse &to num &kp LEFT &kp UP &kp DOWN &kp RIGHT
+                               &trans &trans
+            >;
+            };
+            media {
+            bindings = <
+            &none &none &none &none &kp C_PREV &kp C_VOLUME_UP &kp C_VOLUME_DOWN &kp C_NEXT
+                              &none &none
+            >;
+            };
+            blt {
+            bindings = <
+            &out OUT_TOG &out OUT_USB &out OUT_BLE &none &bt BT_PRV &none &none &bt BT_NXT
+                              &none &none
+            >;
+            };
+             tmp {
+             bindings = <
+             &mt F1 N1 &mt F2 N2 &mt F3 N3 &mt F4 N4 &mt F5 N5 &mt F6 N6 &mt F7 N7 &mt F8 N8
+                                   &trans &trans
+            >;
+            };
+             mouse {
+             bindings = <
+             &none &none &mkp LCLK &mkp RCLK &none &none &none &none   
+                                   &trans &trans
+            >;
+            };
+     };
+
+    combos {
+            compatible ="zmk,combos";
+            combo_num {
+               timeout-ms = <100>;
+               key-positions = <0 1 2 3>;
+               layers = <arstneio nav media blt>;
+               bindings = <&to num>;
+            };
+            comb_numarst {
+               timeout-ms = <100>;
+               key-positions = <0 1 2 3>;
+               layers = <num>;
+               bindings = <&to arstneio>;
+            };
+//            combo_nav {
+//               timeout-ms = <100>;
+//               key-positions = <4 5 6 7>;
+//               layers = <arstneio num media blt>;
+//               bindings = <&to nav>;
+//            };
+            combo_navarst {
+                timeout-ms = <100>;
+                key-positions = <4 5 6 7>;
+                layers = <nav>;
+                bindings = <&to arstneio>;
+            };
+            combo_media {
+               timeout-ms = <100>;
+               key-positions = <2 4>;
+               layers = <nav>;
+               bindings = <&tog media>;
+
+            };
+            combo_mediaarst {
+                timeout-ms = <100>;
+                key-positions = <0 1 2 3 4 5 6 7 8 9>;
+                layers = <media>;
+                bindings = <&to arstneio>;
+            };
+            combo_blt {
+               timeout-ms = <100>;
+               key-positions = <3 4 8 9>;
+               layers = <arstneio nav media num>;
+               bindings = <&to blt>;
+            };
+            combo_bltarst {
+               timeout-ms = <100>;
+               key-positions = <3 4 8 9>;
+               layers = <blt>;
+               bindings = <&to arstneio>;
+               };
+             combo_ent {
+                timeout-ms = <80>;
+                key-positions = <8 9>;
+                bindings = <&ee>;
+            };
+             combo_alt {
+               timeout-ms = <90>;
+               key-positions = <0 3 8>;
+               require-prior-idle-ms = <200>;
+               bindings = <&htal>;
+            };
+             combo_alttog {
+               timeout-ms = <100>;
+               key-positions = <0 3 8 9>;
+               bindings = <&kt LALT>;
+            };
+             combo_back {
+               timeout-ms = <100>;
+               key-positions = <0 7>;
+               bindings = <&kp SEMICOLON>;
+            };
+              combo_boot {
+               timeout-ms = <100>;
+               key-positions = <0 1 2 5 6 7>;
+               bindings = <&bootloader>;
+            };
+              combo_rst {
+               timeout-ms = <100>;
+               key-positions = <0 1 2 3 4 5 6 7>;
+               bindings = <&sys_reset>;
+            };
+              combo_ctrl_o {
+               timeout-ms = <60>;
+               key-positions = <7 8>;
+               bindings = <&kp LC(O)>;
+            };
+              combo_bsword {
+               timeout-ms = <120>;
+               key-positions = <6 7 9>;
+               bindings = <&kp LC(BSPC)>;
+            };
+            combo_ctrl {
+               timeout-ms = <60>;
+               key-positions = <1 3 8>;
+               require-prior-idle-ms = <200>;
+               bindings = <&sk LCTRL>;
+            };
+            combo_ctrltog {
+               timeout-ms = <200>;
+               key-positions = <1 3 8 9>;
+               bindings = <&kt LCTRL>;
+            };
+            combo_lalt {
+               timeout-ms = <50>;
+               key-positions = <0 3>;
+               layers = <nav>;
+               bindings = <&kt LALT>;
+            };
+            combo_tab {
+               timeout-ms = <50>;
+               slow-release;
+               key-positions = <2 3 8>;
+               require-prior-idle-ms = <30>;
+               bindings = <&kp TAB>;
+            };
+            combo_tabtog {
+               timeout-ms = <60>;
+               key-positions = <2 3 8 9>;
+               bindings = <&kt TAB>;
+            };
+            combo_win {
+               timeout-ms = <40>;
+               key-positions = <0 1 8>;
+               require-prior-idle-ms = <200>;
+               bindings = <&kp LGUI>;
+            };
+            combo_wintog {
+               timeout-ms = <40>;
+               key-positions = <0 1 8 9>;
+               bindings = <&kt LGUI>;
+            };
+            combo_comma {
+               timeout-ms = <60>;
+               key-positions = <2 5>;
+               layers = <num arstneio>;
+               slow-release;
+               bindings = <&kp COMMA>;
+            };
+
+            string_sim {
+               timeout-ms = <75>;
+               key-positions = <2 4 6>;
+               layers = <arstneio>;
+               require-prior-idle-ms = <200>;
+               bindings = <&string_sim>;
+            };
+            combo_tempnum {
+              timeout-ms = <100>;
+              key-positions = <0 1 2 3 8>;
+              slow-release;
+              bindings = <&mo num>;
+            };
+
+            key_repeatr {
+               timeout-ms = <50>;
+               key-positions = <5 6 9>;
+               bindings = <&key_repeat>;
+            };
+            key_repeatl {
+               timeout-ms = <50>;
+               key-positions = <1 2 8>;
+               bindings = <&key_repeat>;
+            };
+            bspc {
+               timeout-ms = <50>;
+               key-positions = <6 7>;
+               bindings = <&kp BACKSPACE>;
+            };
+            COMBOL(dt, &kp DOT,arstneio num tmp, 1 6)
+            COMBOLS(ww, &kp W,arstneio , 0 1)
+            COMBOLL(xx, &kp X,arstneio , 0 2)
+            COMBOLS(pp, &kp P,arstneio , 0 3)
+            COMBOL(jj, &kp J,arstneio , 0 4)
+            COMBOL(qq, &kp Q,arstneio , 0 5)
+            COMBOL(lbrac, &kp LPAR,arstneio nav num tmp, 0 6)
+            COMBOLS(ff, &kp F,arstneio , 1 2)
+            COMBOLS(cc, &kp C,arstneio , 1 3)
+            COMBOLS(kk, &kp K,arstneio , 1 4)
+            COMBOLS(zz, &kp Z,arstneio , 1 5)
+            COMBOL(rbrac, &kp RPAR,arstneio nav num tmp, 1 7)
+            COMBOLS(dd, &kp D,arstneio , 2 3)
+            COMBOLS(mm, &kp M,arstneio , 2 4)
+            COMBOLS(minus, &kp MINUS,arstneio nav num tmp, 2 6)
+            COMBOLS(apos, &kp APOS,arstneio nav num tmp, 2 7)
+            COMBOLS(bb, &mt N9 B,arstneio , 3 4)
+            COMBOL(gesc, &gresc,nav ,2 5)
+            COMBOL(nu9, &mt F9 N9,num tmp, 3 4)
+            COMBOLS(vv, &mt N0 V,arstneio , 3 5)
+            COMBOL(nten, &mt F10 N0,num tmp, 3 5)
+            COMBOLS(gg, &kp G,arstneio, 3 6)
+            COMBOL(quest, &mt EQUAL QMARK,arstneio nav num tmp, 3 7)
+            COMBOLS(hh, &mt NON_US_HASH H,arstneio , 4 5)
+            COMBOL(yy, &kp Y,arstneio , 4 6)
+            COMBOLL(ll, &kp L,arstneio , 4 7)
+            COMBOL(uu, &kp U,arstneio , 5 6)
+            COMBOL(exc, &kp EXCL,arstneio num tmp, 5 7)
+            COMBOLL(slash, &kp SLASH,arstneio num tmp, 2 4 7)
+            COMBOLL(bslash, &kp NON_US_BSLH,arstneio num tmp, 2 4 7 8)
+            COMBOL(home, &kp HOME,arstneio nav num tmp, 4 9)
+            COMBOL(end, &kp END,arstneio nav num tmp, 7 9)
+            COMBOLL(ribr, &mt RBRC RBKT,arstneio nav num tmp, 1 7 8)
+            COMBOLL(lebr, &mt LBRC LBKT,arstneio nav num tmp, 0 6 8)
+            COMBOL(play, &kp C_PP, media, 0 3)
+            COMBOL(mute, &kp C_MUTE, media, 2 4)
+            COMBOL(string_the, &string_the,arstneio, 3 4 5)
+            COMBOLL(string_there, &string_there,arstneio, 1 3 4 5)
+            COMBOL(string_and, &string_and,arstneio, 0 3 4)
+            COMBOL(string_you, &string_you,arstneio, 4 5 6)
+            COMBOL(string_vim, &string_vim,arstneio, 3 5 6)
+            COMBOL(string_ing, &string_ing,arstneio, 3 4 6)
+            COMBOL(string_for, &string_for,arstneio num tmp, 1 2 7)
+            COMBOL(string_ion, &string_ion,arstneio, 4 6 7)
+            COMBOL(string_star, &string_star,arstneio, 1 2 3)
+            COMBOLL(string_cluster, &string_cluster,arstneio, 1 3 4 7)
+            COMBOL(string_while, &string_while,arstneio, 0 1 4 5)
+            COMBOLL(string_igh, &string_igh,arstneio, 3 4 5 6)
+            COMBOLL(string_particle, &string_particle,arstneio, 0 1 3 4 7)
+            COMBOLL(string_ould, &string_ould,arstneio, 5 6 7)
+            COMBOLL(string_ough, &string_ough,arstneio, 1 2 5 6)
+            COMBOL(string_hydrodynamics, &string_hydrodynamics ,arstneio, 2 3 4 5 9)
+            COMBOLL(string_interest, &string_interest,arstneio, 4 5 6 9)
+            COMBOLL(string_function, &string_function,arstneio, 1 2 5 6 9)
+            COMBOLL(string_have, &string_have,arstneio, 0 3 5)
+            COMBOLL(string_that, &string_that,arstneio, 0 3 4 5)
+            COMBOL(string_with, &string_with,arstneio, 0 1 6)
+            COMBOLL(string_what, &string_what,arstneio, 0 1 3 7)
+            COMBOL(string_who, &string_who,arstneio, 0 1 7)
+            COMBOLL(string_which, &string_which,arstneio, 0 1 3)
+            COMBOLL(string_make, &string_make,arstneio, 0 1 2 4)
+            COMBOL(string_real, &string_real,arstneio, 1 4 7)
+            COMBOLL(string_take, &string_take,arstneio, 0 1 3 4)
+            COMBOLL(string_good, &string_good,arstneio, 2 3 6 7)
+            COMBOL(string_done, &string_done,arstneio, 2 3 4 7)
+            COMBOLL(string_ound, &string_ound,arstneio, 2 3 5 6 7)
+            COMBOLL(string_ause, &string_ause,arstneio, 0 2 5 6)
+            COMBOL(string_had, &string_had,arstneio, 2 3 4 5)
+            COMBOLL(string_print, &string_print,arstneio, 0 1 3 6)
+            COMBOL(string_well, &string_well,arstneio nav num tmp, 0 1 5)
+            COMBOL(string_just, &string_just,arstneio, 2 3 4)
+            COMBOLL(string_those, &string_those,arstneio, 3 4 5 7)
+            COMBOL(string_first, &string_first,arstneio, 1 2 6)
+            COMBOLL(string_this, &string_this,arstneio, 2 3 4 5 8)
+            COMBOLL(string_how, &string_how,arstneio, 4 5 7)
+            COMBOL(string_qu, &string_qu,arstneio, 0 5 6)
+            COMBOL(string_mass, &string_mass,arstneio, 0 2 4)
+            COMBOLL(string_again, &string_again,arstneio, 0 3 6)
+            COMBOLL(string_against, &string_against,arstneio, 0 2 3 6)
+            COMBOL(string_each, &string_each,arstneio, 0 4 5)
+            COMBOL(string_ink, &string_ink,arstneio, 1 4 6)
+            COMBOLL(string_change, &string_change,arstneio, 1 3 4 5 6)
+            COMBOLL(string_system, &string_system,arstneio, 2 3 4 6 9)
+            COMBOLL(string_program, &string_program,arstneio, 0 1 3 7 9)
+            COMBOLL(string_progress, &string_progress,arstneio, 0 1 3 6 7)
+            COMBOLL(string_resolution, &string_resolution,arstneio, 1 4 5 6 7)
+            COMBOLL(string_about, &string_about,arstneio, 3 4 5 6 7)
+            COMBOLL(string_ever, &string_ever,arstneio, 1 3 5)
+            COMBOL(string_come, &string_come,arstneio, 1 3 7)
+            COMBOLL(string_cool, &string_cool,arstneio, 1 3 7 9)
+            COMBOL(string_find, &string_find,arstneio, 1 2 4)
+            COMBOLL(string_will, &string_will,arstneio, 0 1 4 7)
+            COMBOL(string_also, &string_also,arstneio, 0 4 7)
+            COMBOLL(string_when, &string_when,arstneio, 0 1 4)
+            COMBOL(string_away, &string_away,arstneio, 0 1 4 6)
+            COMBOL(string_basically, &string_basically,arstneio, 0 6 7)
+            COMBOL(string_here, &string_here,arstneio, 1 4 5)
+            COMBOLL(string_ready, &string_ready,arstneio, 1 2 3 4 6)
+            COMBOL(string_individual, &string_individual,arstneio, 2 3 4 6)
+            COMBOL(string_use, &string_use,arstneio, 2 5 6)
+            COMBOLL(string_same, &string_same,arstneio, 0 2 4 5)
+            COMBOL(string_has, &string_has,arstneio, 2 4 5)
+            COMBOLL(string_going, &string_going,arstneio, 3 4 6 7)
+            COMBOL(string_was, &string_was,arstneio, 0 1 2)
+            COMBOLL(string_range, &string_range,arstneio, 1 3 4 6)
+            COMBOLL(string_out, &string_out,arstneio, 3 5 6 7)
+            COMBOL(string_astrophysics, &string_astrophysics,arstneio, 0 2 3 8)
+            COMBOL(string_over, &string_over,arstneio, 1 3 5 7)
+            COMBOLL(string_join, &string_join,arstneio, 0 4 6 7)
+            COMBOLL(string_give, &string_give,arstneio, 3 5 6 8)
+            COMBOLL(string_ous, &string_ous,arstneio, 2 5 6 7)
+            COMBOLL(string_ously, &string_ously,arstneio, 2 4 5 6 7)
+            COMBOL(string_say, &string_say,arstneio, 0 4 6)
+            COMBOLL(string_eigh, &string_eigh,arstneio, 3 4 5 6 9)
+            COMBOLL(string_some, &string_some,arstneio, 2 4 6 7)
+            COMBOLL(string_follow, &string_follow,arstneio, 0 1 2 4 7)
+            COMBOL(string_sure, &string_sure,arstneio, 1 2 5 6 8)
+            COMBOLL(string_plan, &string_plan,arstneio, 0 3 4 7)
+            COMBOLL(string_more, &string_more,arstneio, 1 2 4 7)
+            COMBOSR(combo_ctrlC, &kp LC(C), 2 8)
+            COMBOSR(combo_ctrlV, &kp LC(V), 3 8)
+            COMBOSR(combo_ctrlS, &kp LC(S), 1 2 3 8)
+    };
+     };

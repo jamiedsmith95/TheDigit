@@ -1,0 +1,11 @@
+file_format: "1"
+id: digit
+name: The Digit
+type: shield
+url: https://github.com/jamiedsmith95/zmk-config
+requires: [pro_micro]
+features:
+   -keys
+siblings:
+   -digit_left
+   -digit_right
