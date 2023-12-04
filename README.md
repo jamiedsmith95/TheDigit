@@ -3,7 +3,7 @@ A chorded keyboard, roughly based on the ginny, the Digit has 5 keys on each sid
 
 ![The Digit](The_Digit.jpg)
 
-## ZMK 
+## Firmware
 Zephyr Mechanical Keyboards or ZMK is an open source firmware for keyboards. Within ZMK are a number of useful functionalities that make such a keyboard usable.
 - Layering
 - Chording
@@ -12,7 +12,11 @@ Zephyr Mechanical Keyboards or ZMK is an open source firmware for keyboards. Wit
 - Macros
 
 ### Layers
-Layers allow the user to change the function of the keys they have access to as well as the ability to change the chords they have access to. For example, a number layer could change the main 8 keys to the numbers 1 to 8, with 9 and 0 put as an easy to reach chord. Additional layers can then be added for virtually unlimited functionality.
+Layers allow the user to change the function of the keys they have access to as well as the ability to change the chords they have access to. For example, a number layer could change the main 8 keys to the numbers 1 to 8, with 9 and 0 put as an easy to reach chord. Additional layers can then be added for virtually unlimited functionality. Layers can be activated in multiple ways allowing for enhanced customisation.
+
+1. They can be toggled on or off.
+2. They can be turned momentarily on, this means that the layer is deactivated if the key or chord is released.
+3. They can be turned on while all other layers are deactivated.
 
 ### Chords
 Chords are triggered by pressing two or more keys down at the same time (within a small tolerance). With the available combinations of two keys the user now has more than enough inputs available for the alphabet and the more common punctuation.
@@ -24,7 +28,8 @@ Tap dancing is the name given to the keyboard behaviour that allows the user to 
 Similarly to tap-dance, tap-hold allows the user to trigger different behaviours when they tap a key and when they hold it. For example, pressing ESC for escape and hold it down to activate a layer.
 
 ### Macros
-Macros are one of the features that really speed up typing and allow the user to properly customise the firmware. A macro can be configured to input sequences of keys, whether they form words or are combinations of modifiers that trigger a frequently used shortcut.
+Macros are one of the features that really speed up typing and allow the user to properly customise the firmware. A macro can be configured to input sequences of keys, whether they form words or are combinations of modifiers that trigger a frequently used shortcut. This allows typing words or even frequently used phrases with a single chord. 
 
-
+## The keymap
+The keymap is a file that holds all the information specifying these behaviours. The keymap and other ZMK files I use can be found in zmk_keymap.
 
